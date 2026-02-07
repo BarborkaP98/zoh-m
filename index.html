@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>ZOH 2026 – Kalendář slovních úloh</title>
+  <meta name="description" content="Každý den ZOH 2026 se v 00:00 odemkne nová slovní úloha. Úvod je k dispozici po celou dobu. Řešení se otevře 23. 2. 2026." />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <h1>Kalendář slovních úloh – ZOH 2026</h1>
+    <p>
+      Každý den se v <strong>00:00</strong> (Europe/Prague) odemkne nové okýnko.
+      Úvod je viditelný stále. Řešení se otevře po skončení olympiády.
+    </p>
+  </header>
+
+  <main>
+    <section id="grid" class="grid" aria-live="polite"></section>
+
+    <noscript>
+      Pro zobrazení obsahu povolte JavaScript. Bez něj nelze načasovat odemykání okýnek.
+    </noscript>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 – ZOH kalendář. Statická stránka (GitHub Pages). Časová zóna: Europe/Prague.</p>
+  </footer>
+
+  <!-- KONFIGURACE KALENDÁŘE -->
+  <script>
+    window.__CAL_CONFIG__ = {
+      timezone: 'Europe/Prague',
+      items: [
+        { kind: 'intro', title: 'Úvod', date: '1970-01-01', img: 'assets/intro.png', alt: 'Úvod k projektu' },
+
+        { kind: 'day', title: 'Den 1', date: '2026-02-06', img: 'assets/days/02-06-02.png', alt: 'Slovní úloha – 6. únor' },
+        { kind: 'day', title: 'Den 2', date: '2026-02-07', img: 'assets/days/03-07-02.png', alt: 'Slovní úloha – 7. únor' },
+        { kind: 'day', title: 'Den 3', date: '2026-02-08', img: 'assets/days/04-08-02.png', alt: 'Slovní úloha – 8. únor' },
+        { kind: 'day', title: 'Den 4', date: '2026-02-09', img: 'assets/days/05-09-02.png', alt: 'Slovní úloha – 9. únor' },
+        { kind: 'day', title: 'Den 5', date: '2026-02-10', img: 'assets/days/06-10-02.png', alt: 'Slovní úloha – 10. únor' },
+        { kind: 'day', title: 'Den 6', date: '2026-02-11', img: 'assets/days/07-11-02.png', alt: 'Slovní úloha – 11. únor' },
+        { kind: 'day', title: 'Den 7', date: '2026-02-12', img: 'assets/days/08-12-02.png', alt: 'Slovní úloha – 12. únor' },
+        { kind: 'day', title: 'Den 8', date: '2026-02-13', img: 'assets/days/09-13-02.png', alt: 'Slovní úloha – 13. únor' },
+        { kind: 'day', title: 'Den 9', date: '2026-02-14', img: 'assets/days/10-14-02.png', alt: 'Slovní úloha – 14. únor' },
+        { kind: 'day', title: 'Den 10', date: '2026-02-15', img: 'assets/days/11-15-02.png', alt: 'Slovní úloha – 15. únor' },
+        { kind: 'day', title: 'Den 11', date: '2026-02-16', img: 'assets/days/12-16-02.png', alt: 'Slovní úloha – 16. únor' },
+        { kind: 'day', title: 'Den 12', date: '2026-02-17', img: 'assets/days/13-17-02.png', alt: 'Slovní úloha – 17. únor' },
+        { kind: 'day', title: 'Den 13', date: '2026-02-18', img: 'assets/days/14-18-02.png', alt: 'Slovní úloha – 18. únor' },
+        { kind: 'day', title: 'Den 14', date: '2026-02-19', img: 'assets/days/15-19-02.png', alt: 'Slovní úloha – 19. únor' },
+        { kind: 'day', title: 'Den 15', date: '2026-02-20', img: 'assets/days/16-20-02.png', alt: 'Slovní úloha – 20. únor' },
+        { kind: 'day', title: 'Den 16', date: '2026-02-21', img: 'assets/days/17-21-02.png', alt: 'Slovní úloha – 21. únor' },
+        { kind: 'day', title: 'Den 17', date: '2026-02-22', img: 'assets/days/18-22-02.png', alt: 'Slovní úloha – 22. únor' },
+
+        { kind: 'solution', title: 'Řešení', date: '2026-02-23', img: 'assets/reseni.png', alt: 'Řešení všech úloh' }
+      ]
+    };
+  </script>
+
+  <!-- HLAVNÍ LOGIKA -->
+  <script src="script.js"></script>
+</body>
+</html>
