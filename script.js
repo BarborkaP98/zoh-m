@@ -9,7 +9,6 @@
 
   if (!grid) return;
 
-  // === DNES V ČASOVÉ ZÓNĚ CZ ===
   function todayISOInTZ() {
     const parts = new Intl.DateTimeFormat('en-CA', {
       timeZone: TZ,
@@ -25,7 +24,6 @@
     return `${y}-${m}-${d}`;
   }
 
-  // === FORMÁT ČESKÉHO DATA ===
   function formatCzDate(iso) {
     const [y, m, d] = iso.split('-').map(Number);
     const dt = new Date(Date.UTC(y, m - 1, d));
@@ -38,30 +36,16 @@
     }).format(dt);
   }
 
-  // === JE ODEMKČENO? ===
   function isUnlocked(iso) {
     return iso <= todayISOInTZ();
   }
 
-  // === ZÁMEK ===
-  function lockBadge() {
-    const span = document.createElement('div');
-    span.className = 'lock-badge';
-    span.innerHTML = `
-      <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
-        <path d="M12 2a5 5 0 00-5 5v3H6a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2v-8a2 2 0 00-2-2h-1V7a5 5 0 00-5-5zm-3 8V7a3 3 0 016 0v3H9z"/>
-      </svg>
-      <span>Zamčeno</span>
-    `;
-    return span;
-  }
-
-  // === JEDNO OKÉNKO ===
   function makeTile(item) {
     const unlocked = item.kind === 'intro' || isUnlocked(item.date);
 
     const article = document.createElement('article');
     article.className = 'tile';
+    if (!unlocked) article.classList.add('locked');
 
     const link = document.createElement('a');
     link.href = unlocked ? item.img : '#';
@@ -74,18 +58,23 @@
     const thumb = document.createElement('div');
     thumb.className = 'thumb';
 
-    const img = document.createElement('img');
-    img.loading = 'lazy';
-    img.decoding = 'async';
-
-    // 🔴 KLÍČOVÁ ČÁST – ZAKRYTÍ OBSAHU
-    img.src = unlocked ? item.img : 'assets/locked.png';
-    img.alt = unlocked
-      ? (item.alt || item.title)
-      : 'Zamčené okénko';
-
-    thumb.appendChild(img);
-    if (!unlocked) thumb.appendChild(lockBadge());
+    if (unlocked) {
+      const img = document.createElement('img');
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.src = item.img;
+      img.alt = item.alt || item.title;
+      thumb.appendChild(img);
+    } else {
+      // ❌ žádný obrázek – jen šedý blok
+      const cover = document.createElement('div');
+      cover.className = 'locked-cover';
+      cover.innerHTML = `
+        <div class="lock-icon">🔒</div>
+        <div class="lock-text">Odemkne se<br>${formatCzDate(item.date)}</div>
+      `;
+      thumb.appendChild(cover);
+    }
 
     const caption = document.createElement('div');
     caption.className = 'caption';
@@ -97,9 +86,7 @@
         : `${item.title} – ${formatCzDate(item.date)}`;
 
     const p = document.createElement('p');
-    p.textContent = unlocked
-      ? 'Odemčeno'
-      : `Odemkne se ${formatCzDate(item.date)} v 00:00`;
+    p.textContent = unlocked ? 'Odemčeno' : 'Zamčeno';
 
     caption.appendChild(h3);
     caption.appendChild(p);
@@ -111,7 +98,6 @@
     return article;
   }
 
-  // === VYKRESLENÍ KALENDÁŘE ===
   function render() {
     grid.innerHTML = '';
     cfg.items.forEach(item => {
@@ -120,7 +106,6 @@
   }
 
   render();
-
-  // každou minutu kontrola, jestli se něco neodemklo
   setInterval(render, 60 * 1000);
 })();
+
